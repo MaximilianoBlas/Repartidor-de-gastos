@@ -1,0 +1,55 @@
+@import "./theme.module.scss";
+
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;
+    background-color: $secondaryColor;
+    overflow: hidden;
+}
+
+
+.divContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.RepartidorInput{
+   height: 3vh;
+   width: 15vw;
+   border-radius: 15px;
+   background-color: $tertiaryColor;
+   margin-bottom: 3vh;
+   font-size: large;
+   text-align: center;
+   font-weight: 700;
+}
+
+.checkbox  {
+   transform: scale(2);
+   margin: 10px;
+}
+.label{
+    font-size: large;
+    font-weight: 700;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 33vw;
+    align-items: center;
+}
+
+.button{
+    background-color: $primaryColor;
+width: 15vw;
+height: 5vh;
+border-radius: 15px;
+margin-bottom: 2vh;
+font-size: medium;
+font-weight: 700;
+}
