@@ -203,6 +203,7 @@ export default function Home() {
         let montoARepartir = Math.trunc(
             compraPorRepartir[0] / (amigosParaRepartir.length + 1)
         );
+        console.log("amigos para repartir", amigosParaRepartir)
         console.log("monto a repartir", montoARepartir);
 
         tableroCompleto = tableroCompleto.map((ele, index) => {
