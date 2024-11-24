@@ -28,7 +28,7 @@ export default function Home() {
         <div className={container}>
           <h2>Distribuir</h2>
 
-          <DistribucionAutomatica />
+          {/* <DistribucionAutomatica /> */}
 
           <CompraADividir />
           <AmigosParaRepartir />
