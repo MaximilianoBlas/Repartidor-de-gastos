@@ -6,20 +6,13 @@ import {
   container,
 } from "./style/style.module.scss";
 // import { CompletarTablero } from "./Hooks/completarTablero";
-import { AgregarAmigo } from "./componentes/AgregarAmigos/page";
+import { AgregarAmigo } from "./componentes/AgregarAmigos/agregarAmigos";
 import { AgregarCompra } from "./componentes/AgregarCompra/page";
 import { CompraADividir } from "./componentes/CompraADividir/page";
 import { RepartirDinero } from "./componentes/RepartirDinero/page";
 import { DistribucionAutomatica } from "./componentes/DistribucionAutomatica/page";
 import { AmigosParaRepartir } from "./componentes/AmigosParaRepartir/amigosParaRepartir";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  cambiarAmigos,
-  cambiarCompras,
-  cambiarElegido,
-  cambiarGrilla,
-  cambiarAmigo,
-} from "./reduxToolkit/slice";
 
 export default function Home() {
   const dispatch = useDispatch();
