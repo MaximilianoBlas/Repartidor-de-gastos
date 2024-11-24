@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cambiarAmigo, cambiarAmigos } from "../../reduxToolkit/slice";
+import { cambiarAmigos } from "../../reduxToolkit/slice";
 import {
   RepartidorInput,
   container,
@@ -11,18 +11,12 @@ import {
 
 export const AgregarAmigo = () => {
   const dispatch = useDispatch();
-  const [amigo, setAmigo] = useState();
-  //   const amigo = useSelector((state) => state.valores.amigo);
+  const [amigo, setAmigo] = useState("");
   const amigos = useSelector((state) => state.valores.amigos);
 
   const agregarAmigo = () => {
     dispatch(cambiarAmigos([...amigos, { amigo }]));
     setAmigo("");
-    // dispatch(cambiarAmigo(""));
-    // if (process.browser) {
-    //   let inputAmigos = document && document.getElementById("amigos");
-    //   inputAmigos && inputAmigos.focus();
-    // }
     let inputAmigos = document && document.getElementById("amigos");
     inputAmigos && inputAmigos.focus();
   };
