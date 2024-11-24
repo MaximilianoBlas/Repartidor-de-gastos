@@ -9,7 +9,7 @@ import {
   cambiarElegidos,
 } from "@/app/reduxToolkit/slice";
 import { button } from "../../style/style.module.scss";
-import { RepartirDinero } from "../RepartirDinero/page";
+import { RepartirDinero } from "../RepartirDinero/repartirDinero";
 import { useEffect, useState } from "react";
 
 export const DistribucionAutomatica = (

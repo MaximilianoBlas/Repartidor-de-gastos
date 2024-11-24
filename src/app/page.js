@@ -7,10 +7,10 @@ import {
 } from "./style/style.module.scss";
 // import { CompletarTablero } from "./Hooks/completarTablero";
 import { AgregarAmigo } from "./componentes/AgregarAmigos/agregarAmigos";
-import { AgregarCompra } from "./componentes/AgregarCompra/page";
-import { CompraADividir } from "./componentes/CompraADividir/page";
-import { RepartirDinero } from "./componentes/RepartirDinero/page";
-import { DistribucionAutomatica } from "./componentes/DistribucionAutomatica/page";
+import { AgregarCompra } from "./componentes/AgregarCompra/agregarCompra";
+import { CompraADividir } from "./componentes/CompraADividir/compraADividir";
+import { RepartirDinero } from "./componentes/RepartirDinero/repartirDinero";
+import { DistribucionAutomatica } from "./componentes/DistribucionAutomatica/distribucionAutomatica";
 import { AmigosParaRepartir } from "./componentes/AmigosParaRepartir/amigosParaRepartir";
 import { useDispatch, useSelector } from "react-redux";
 
