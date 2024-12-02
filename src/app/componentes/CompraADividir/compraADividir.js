@@ -2,7 +2,6 @@
 
 import {
   cambiarCompraPorRepartir,
-  cambiarElegido,
   cambiarElegidos,
 } from "@/app/reduxToolkit/slice";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,11 +25,6 @@ export const CompraADividir = () => {
 
     dispatch(
       cambiarElegidos({
-        ...amigosConQuienesRepartir,
-      })
-    );
-    dispatch(
-      cambiarElegido({
         ...amigosConQuienesRepartir,
       })
     );

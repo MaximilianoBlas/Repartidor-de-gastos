@@ -4,14 +4,15 @@ import {
   mainContainer,
   divContainer,
   container,
+  p,
 } from "./style/style.module.scss";
 // import { CompletarTablero } from "./Hooks/completarTablero";
 import { AgregarAmigo } from "./componentes/AgregarAmigos/agregarAmigos";
 import { AgregarCompra } from "./componentes/AgregarCompra/agregarCompra";
 import { CompraADividir } from "./componentes/CompraADividir/compraADividir";
 import { RepartirDinero } from "./componentes/RepartirDinero/repartirDinero";
-import { DistribucionAutomatica } from "./componentes/DistribucionAutomatica/distribucionAutomatica";
 import { AmigosParaRepartir } from "./componentes/AmigosParaRepartir/amigosParaRepartir";
+import { DistribucionAutomatica } from "./componentes/DistribucionAutomatica/distribucionAutomatica";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
@@ -28,7 +29,7 @@ export default function Home() {
         <div className={container}>
           <h2>Distribuir</h2>
 
-          {/* <DistribucionAutomatica /> */}
+          <DistribucionAutomatica />
 
           <CompraADividir />
           <AmigosParaRepartir />
@@ -45,9 +46,11 @@ export default function Home() {
               amigo.pagar.map((pago, indicePago) => {
                 return (
                   amigo.amigo !== pago.pagarA && (
-                    <h2
-                      key={`${indiceAmigo}${indicePago}`}
-                    >{`${amigo.amigo} paga a ${pago.pagarA} $${pago.monto}`}</h2>
+                    <p className={p} key={`${indiceAmigo}${indicePago}`}>{`${
+                      amigo.amigo.charAt(0).toUpperCase() + amigo.amigo.slice(1)
+                    } paga a ${
+                      pago.pagarA.charAt(0).toUpperCase() + pago.pagarA.slice(1)
+                    } $${pago.monto} por el producto "${pago.compra}"`}</p>
                   )
                 );
               })

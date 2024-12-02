@@ -66,15 +66,28 @@
 .button {
   background-color: $primaryColor;
   width: 15vw;
-  height: 5vh;
+  height: auto;
   border-radius: 15px;
   margin-bottom: 2vh;
   font-size: medium;
   font-weight: 700;
+  padding: 2%;
 }
 
 @media screen and (max-width: 400px) {
   .button {
     width: 30%;
+  }
+}
+
+.p {
+  font-size: xx-large;
+  font-weight: bolder;
+}
+
+@media screen and (max-width: 400px) {
+  .p {
+    font-size: medium;
+    font-weight: bolder;
   }
 }

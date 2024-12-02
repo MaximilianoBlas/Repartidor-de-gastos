@@ -40,13 +40,36 @@ export const AgregarCompra = ({ tableroCompleto }) => {
     setCompra({ compra: "", precio: "", amigo: "" });
     dispatch(agregarCompras([...compras, compra]));
 
-    let inputCompra = document && document.getElementById("compra");
-    inputCompra && inputCompra.focus();
+    let inputAmigo = document && document.getElementById("amigo");
+    inputAmigo && inputAmigo.focus();
   };
 
   return (
     <div className={container}>
       <h2>Agregar Compras</h2>
+      <h3>Amigo que compro</h3>
+      <select
+        className={RepartidorInput}
+        name="amigo"
+        id="amigo"
+        value={compra.amigo}
+        onChange={(e) =>
+          setCompra({
+            ...compra,
+            [e.target.name]: e.target.value,
+          })
+        }
+      >
+        <option value="cartel">Elige el amigo</option>
+        {amigos.map((e, i) => {
+          count++;
+          return (
+            <option value={e.amigo} key={count}>
+              {e.amigo}
+            </option>
+          );
+        })}
+      </select>
       <h3>Producto</h3>
       <input
         className={RepartidorInput}
@@ -74,29 +97,7 @@ export const AgregarCompra = ({ tableroCompleto }) => {
           })
         }
       />
-      <h3>Amigo que compro</h3>
-      <select
-        className={RepartidorInput}
-        name="amigo"
-        id="amigo"
-        value={compra.amigo}
-        onChange={(e) =>
-          setCompra({
-            ...compra,
-            [e.target.name]: e.target.value,
-          })
-        }
-      >
-        <option value="cartel">Elige el amigo</option>
-        {amigos.map((e, i) => {
-          count++;
-          return (
-            <option value={e.amigo} key={count}>
-              {e.amigo}
-            </option>
-          );
-        })}
-      </select>
+
       <button className={button} onClick={() => agregarCompra()}>
         Sumar
       </button>

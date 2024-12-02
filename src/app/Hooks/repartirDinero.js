@@ -1,147 +1,157 @@
-"use client"
+"use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { cambiarCompraPorRepartir, cambiarMatrizFinal, cambiarTableroCompleto } from "../reduxToolkit/slice";
+export const Repartir = (amigos, elegidos, compraPorRepartir) => {
+  const montoADividir = compraPorRepartir.precio;
+  const elegidosFiltrados = Object.keys(elegidos).filter(
+    (elegido) => elegidos[elegido]
+  );
 
-export const RepartirDinero = () => {
+  let montoAPagarPorAmigo = montoADividir / elegidosFiltrados.length;
 
-const dispatch = useDispatch();
+  let pagoARestar, diferenciaARestar, amigoARestar, pagoAEliminar;
 
-let distribucionAutomatica = useSelector(
-    (state) => state.valores.distribucionAutomatica
-);
-let compraPorRepartirInterna = useSelector(
-    (state) => state.valores.compraPorRepartirInterna
-);
-let compraARepartir = useSelector((state) => state.valores.compraARepartir);
-let amigo = useSelector((state) => state.valores.amigo);
-let amigos = useSelector((state) => state.valores.amigos);
-let elegido = useSelector((state) => state.valores.elegido);
-let elegidos = useSelector((state) => state.valores.elegidos);
-let elegidosInterno = useSelector((state) => state.valores.elegidosInterno);
-let compraPorRepartir = useSelector((state) => state.valores.compraPorRepartir);
-let compras = useSelector((state) => state.valores.compras);
-let tableroCompleto = useSelector((state) => state.valores.tableroCompleto);
+  let amigosActualizado = amigos.map((amigo) => {
+    if (elegidos[amigo.amigo]) {
+      let amigoAQuienPagar = amigos.find(
+        (acreedor) =>
+          acreedor.amigo === compraPorRepartir.amigo &&
+          acreedor.amigo !== amigo.amigo
+      );
 
-console.log("tableroCompleto - repartir dinero", tableroCompleto);
+      if (amigoAQuienPagar && amigoAQuienPagar.pagar) {
+        let deuda = amigoAQuienPagar.pagar.find(
+          (pago) => pago.pagarA === amigo.amigo
+        );
 
-    console.log("entra a repartir dinero");
-    console.log("elegido", elegido);
-    console.log("elegidos", elegidos);
-    console.log("amigos", amigos);
-    console.log("compras", compras);
+        if (deuda) {
+          if (Math.trunc(montoAPagarPorAmigo) > deuda.monto) {
+            let diferencia = Math.trunc(montoAPagarPorAmigo) - deuda.monto;
 
-    console.log(typeof distribucionAutomatica);
+            pagoAEliminar = deuda;
+            amigoARestar = amigoAQuienPagar;
 
-    console.log("compra por repartir", compraPorRepartir);
-    console.log("tablero completo", tableroCompleto);
-    let amigosParaRepartir = [],
-        montoARepartir;
-    tableroCompleto[0].forEach((e, i) => {
-        if (elegido[e] || (elegidosInterno && elegidosInterno[e])) {
-            console.log("entra al if el muy guacho");
-            amigosParaRepartir = [...amigosParaRepartir, [e, i]];
+            return {
+              ...amigo,
+              pagar: [
+                ...amigo.pagar,
+                {
+                  pagarA: compraPorRepartir.amigo,
+                  monto: diferencia,
+                  compra: compraPorRepartir.compra,
+                },
+              ],
+            };
+          } else {
+            diferenciaARestar = deuda.monto - Math.trunc(montoAPagarPorAmigo);
+            pagoARestar = deuda;
+            amigoARestar = amigoAQuienPagar;
+
+            return {
+              ...amigo,
+            };
+          }
         }
-    });
-    if (
-        distribucionAutomatica &&
-        typeof distribucionAutomatica !== "function"
-    ) {
+      }
+      if (amigo.pagar) {
+        let amigoRepetido;
 
-        console.log("entra al if", compraPorRepartirInterna);
-
-        console.log("amigos para repartir", amigosParaRepartir);
-
-        montoARepartir = Math.trunc(
-            compraPorRepartirInterna[0] / (amigosParaRepartir.length + 1)
-        );
-
-        console.log("monto a repartir", montoARepartir);
-
-        tableroCompleto = tableroCompleto.map((ele, index) => {
-            return ele.map((e, i) => {
-                if (index == compraPorRepartirInterna[3]) {
-                    console.log(compraPorRepartirInterna[3]);
-                    for (let j = 0; j < amigosParaRepartir.length; j++) {
-                        if (i == amigosParaRepartir[j][1]) {
-                            return (e = montoARepartir);
-                        }
-                    }
-                    return e;
-                } else return e;
-            });
+        amigo.pagar.forEach((pago, i) => {
+          if (pago.pagarA === compraPorRepartir.amigo) amigoRepetido = i;
         });
-        console.log("tablero completo", tableroCompleto);
+
+        if (amigoRepetido !== undefined) {
+          let nuevoPago = amigo.pagar.map((pago) => {
+            if (pago.pagarA === compraPorRepartir.amigo)
+              return {
+                pagarA: compraPorRepartir.amigo,
+                monto:
+                  Math.trunc(montoAPagarPorAmigo) +
+                  amigo.pagar[amigoRepetido].monto,
+                compra:
+                  amigo.pagar[amigoRepetido].compra +
+                  "," +
+                  compraPorRepartir.compra,
+              };
+            else return pago;
+          });
+
+          let nuevoAmigo = { ...amigo, pagar: [...nuevoPago] };
+
+          return nuevoAmigo;
+        } else {
+          return {
+            ...amigo,
+            pagar: [
+              ...amigo.pagar,
+              {
+                pagarA: compraPorRepartir.amigo,
+                monto: Math.trunc(montoAPagarPorAmigo),
+                compra: compraPorRepartir.compra,
+              },
+            ],
+          };
+        }
+      } else {
+        return {
+          ...amigo,
+          pagar: [
+            {
+              pagarA: compraPorRepartir.amigo,
+              monto: Math.trunc(montoAPagarPorAmigo),
+              compra: compraPorRepartir.compra,
+            },
+          ],
+        };
+      }
     } else {
-        console.log("compra a repartir", compraARepartir);
-        dispatch(cambiarCompraPorRepartir(compraARepartir));
-        // compraPorRepartir = compraARepartir;
-        console.log(compraPorRepartir);
+      return {
+        ...amigo,
+      };
+    }
+  });
 
-        montoARepartir = Math.trunc(
-            compraPorRepartir[0] / (amigosParaRepartir.length + 1)
+  if (pagoAEliminar) {
+    amigosActualizado = amigosActualizado.map((amigo) => {
+      if (amigo.amigo === amigoARestar.amigo) {
+        let nuevoPago = amigo.pagar.filter(
+          (pago) =>
+            pago.pagarA !== pagoAEliminar.pagarA &&
+            pago.compra !== pagoAEliminar.compra
         );
 
-        console.log("monto a repartir", montoARepartir);
+        let nuevoAmigo = { ...amigo, pagar: [...nuevoPago] };
 
-        console.log(compraPorRepartir);
-
-        tableroCompleto = tableroCompleto.map((ele, index) => {
-            return ele.map((e, i) => {
-                if (index == compraPorRepartir[3]) {
-                    console.log(compraPorRepartir[3]);
-                    for (let j = 0; j < amigosParaRepartir.length; j++) {
-                        if (i == amigosParaRepartir[j][1]) {
-                            return (e = montoARepartir);
-                        }
-                    }
-                    return e;
-                } else return e;
-            });
-        });
-    }
-
-    console.log("llego a la mitad de repartir dinero");
-    let totales = [],
-        totalDeTodo = 0;
-
-    console.log(tableroCompleto);
-    tableroCompleto = tableroCompleto.map((e, index) => {
-        let totalesPorComida = 0;
-        return e.map((e, i) => {
-            if (!index && i && i < amigos.length + 1) {
-                totales[i] = 0;
-                return e;
-            }
-            if (index === compras + 1 && i && i < amigos.length + 1) {
-                e = totales[i];
-                totalDeTodo += e;
-            }
-            if (index === compras + 1 && i === amigos.length + 1) {
-                e = totalDeTodo;
-            }
-            if (index && index < compras + 1 && i && i < amigos.length + 1) {
-                totalesPorComida += e;
-            }
-
-            if (index && index < compras + 1 && i === amigos.length + 1) {
-                return (e = totalesPorComida);
-            }
-            if (index && i) {
-                totales[i] += e;
-                return e;
-            }
-            return e;
-        });
+        return nuevoAmigo;
+      } else {
+        return { ...amigo };
+      }
     });
+  }
 
-    console.log(
-        "tablero completo a finales de repartir dinero",
-        tableroCompleto
-    );
+  if (pagoARestar) {
+    amigosActualizado = amigosActualizado.map((amigo) => {
+      if (amigo.amigo === amigoARestar.amigo) {
+        let nuevoPago = amigo.pagar.map((pago) => {
+          if (
+            pago.pagarA === pagoARestar.pagarA &&
+            pago.compra === pagoARestar.compra
+          ) {
+            return {
+              pagarA: pagoARestar.pagarA,
+              monto: diferenciaARestar,
+              compra: pagoARestar.compra,
+            };
+          } else return pago;
+        });
 
-    dispatch(cambiarMatrizFinal(tableroCompleto));
-    dispatch(cambiarTableroCompleto(tableroCompleto));
+        let nuevoAmigo = { ...amigo, pagar: [...nuevoPago] };
 
-    return tableroCompleto
+        return nuevoAmigo;
+      } else {
+        return { ...amigo };
+      }
+    });
+  }
+
+  return amigosActualizado;
 };
