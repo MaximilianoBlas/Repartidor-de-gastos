@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  cambiarAmigos,
-  cambiarCompra,
-  agregarCompras,
-  cambiarTableroCompleto,
-} from "@/app/reduxToolkit/slice";
+import { cambiarAmigos, agregarCompras } from "@/app/reduxToolkit/slice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   RepartidorInput,
@@ -14,16 +9,24 @@ import {
 } from "../../style/style.module.scss";
 import { useState } from "react";
 
-export const AgregarCompra = ({ tableroCompleto }) => {
+export const AgregarCompra = () => {
   const dispatch = useDispatch();
 
   let selectorAmigos = useSelector((state) => state.valores.amigos);
   let compras = useSelector((state) => state.valores.compras);
+  let restaurante = useSelector((state) => state.valores.restaurante);
   let amigos = selectorAmigos.map((e) => {
     return { ...e };
   });
   const [compra, setCompra] = useState({ compra: "", precio: "", amigo: "" });
   let count = 0;
+
+  const onChange = (e) => {
+    setCompra({
+      ...compra,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const agregarCompra = () => {
     amigos.map((e, i) => {
@@ -37,8 +40,13 @@ export const AgregarCompra = ({ tableroCompleto }) => {
         }
       }
     });
+    if (restaurante) {
+      let nuevaCompra = compra;
+      nuevaCompra.amigo = "restaurante";
+      dispatch(agregarCompras([...compras, nuevaCompra]));
+    } else dispatch(agregarCompras([...compras, compra]));
+
     setCompra({ compra: "", precio: "", amigo: "" });
-    dispatch(agregarCompras([...compras, compra]));
 
     let inputAmigo = document && document.getElementById("amigo");
     inputAmigo && inputAmigo.focus();
@@ -47,29 +55,28 @@ export const AgregarCompra = ({ tableroCompleto }) => {
   return (
     <div className={container}>
       <h2>Agregar Compras</h2>
-      <h3>Amigo que compro</h3>
-      <select
-        className={RepartidorInput}
-        name="amigo"
-        id="amigo"
-        value={compra.amigo}
-        onChange={(e) =>
-          setCompra({
-            ...compra,
-            [e.target.name]: e.target.value,
-          })
-        }
-      >
-        <option value="cartel">Elige el amigo</option>
-        {amigos.map((e, i) => {
-          count++;
-          return (
-            <option value={e.amigo} key={count}>
-              {e.amigo}
-            </option>
-          );
-        })}
-      </select>
+      {!restaurante && (
+        <div>
+          <h3>Amigo que compro</h3>
+          <select
+            className={RepartidorInput}
+            name="amigo"
+            id="amigo"
+            value={compra.amigo}
+            onChange={(e) => onChange(e)}
+          >
+            <option value="cartel">Elige el amigo</option>
+            {amigos.map((e, i) => {
+              count++;
+              return (
+                <option value={e.amigo} key={count}>
+                  {e.amigo}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+      )}
       <h3>Producto</h3>
       <input
         className={RepartidorInput}
@@ -77,12 +84,7 @@ export const AgregarCompra = ({ tableroCompleto }) => {
         name="compra"
         id="compra"
         value={compra.compra}
-        onChange={(e) =>
-          setCompra({
-            ...compra,
-            [e.target.name]: e.target.value,
-          })
-        }
+        onChange={(e) => onChange(e)}
       />
       <h3>Precio</h3>
       <input
@@ -90,12 +92,7 @@ export const AgregarCompra = ({ tableroCompleto }) => {
         type="number"
         name="precio"
         value={compra.precio}
-        onChange={(e) =>
-          setCompra({
-            ...compra,
-            [e.target.name]: e.target.value,
-          })
-        }
+        onChange={(e) => onChange(e)}
       />
 
       <button className={button} onClick={() => agregarCompra()}>

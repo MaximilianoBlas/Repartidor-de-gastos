@@ -1,7 +1,6 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
-
 import { cambiarAmigos } from "@/app/reduxToolkit/slice";
 import { button } from "../../style/style.module.scss";
 import { Repartir } from "@/app/Hooks/repartirDinero";

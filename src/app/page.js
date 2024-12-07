@@ -1,39 +1,51 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   mainContainer,
   divContainer,
   container,
   p,
+  stylePage,
+  stylePageButton,
 } from "./style/style.module.scss";
-// import { CompletarTablero } from "./Hooks/completarTablero";
+import { GoSun } from "react-icons/go";
+import { MdModeNight } from "react-icons/md";
 import { AgregarAmigo } from "./componentes/AgregarAmigos/agregarAmigos";
 import { AgregarCompra } from "./componentes/AgregarCompra/agregarCompra";
 import { CompraADividir } from "./componentes/CompraADividir/compraADividir";
 import { RepartirDinero } from "./componentes/RepartirDinero/repartirDinero";
 import { AmigosParaRepartir } from "./componentes/AmigosParaRepartir/amigosParaRepartir";
 import { DistribucionAutomatica } from "./componentes/DistribucionAutomatica/distribucionAutomatica";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { Restaurante } from "./componentes/Restaurante/restaurante";
 
 export default function Home() {
-  const dispatch = useDispatch();
   let amigos = useSelector((state) => state.valores.amigos);
-  let compras = useSelector((state) => state.valores.compras);
+  const [valueStyle, setValueStyle] = useState(true);
+
+  const styleEvent = () => {
+    setValueStyle(!valueStyle);
+  };
 
   return (
     <div className={mainContainer}>
+      <div className={stylePage}>
+        <button onClick={styleEvent} className={stylePageButton}>
+          {valueStyle ? <GoSun fontSize={20} /> : <MdModeNight fontSize={20} />}
+        </button>
+      </div>
       <h1>Repartidor de gastos</h1>
       <div className={divContainer}>
-        <AgregarAmigo />
+        <div className={container}>
+          <Restaurante />
+          <AgregarAmigo />
+        </div>
         <AgregarCompra />
         <div className={container}>
           <h2>Distribuir</h2>
-
           <DistribucionAutomatica />
-
           <CompraADividir />
           <AmigosParaRepartir />
-
           <RepartirDinero />
         </div>
       </div>

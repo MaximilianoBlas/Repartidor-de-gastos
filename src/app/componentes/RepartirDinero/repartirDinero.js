@@ -9,9 +9,7 @@ export const RepartirDinero = () => {
   const dispatch = useDispatch();
 
   let amigos = useSelector((state) => state.valores.amigos);
-
   let elegidos = useSelector((state) => state.valores.elegidos);
-
   let compraPorRepartir = useSelector(
     (state) => state.valores.compraPorRepartir
   );
