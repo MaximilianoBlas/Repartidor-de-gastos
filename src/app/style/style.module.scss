@@ -7,103 +7,110 @@
   width: 100vw;
   min-height: 100vh;
   height: auto;
-  background-color: $secondaryColor;
+  // background-color: $secondaryColor;
   overflow: hidden;
-}
 
-.divContainer {
-  display: flex;
-  flex-direction: row;
-}
-
-@media screen and (max-width: 400px) {
   .divContainer {
+    display: flex;
+    flex-direction: row;
+  }
+
+  @media screen and (max-width: 400px) {
+    .divContainer {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .RepartidorInput {
+    // height: 3vh;
+    // width: 15vw;
+    border-radius: 15px;
+    // background-color: $tertiaryColor;
+    margin-bottom: 3vh;
+    font-size: large;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  @media screen and (max-width: 400px) {
+    .RepartidorInput {
+      height: auto;
+      width: auto;
+    }
+  }
+
+  .checkbox {
+    transform: scale(2);
+    margin: 15px;
+  }
+  .label {
+    font-size: large;
+    font-weight: 700;
+  }
+
+  .firstColumnContainer {
     display: flex;
     flex-direction: column;
   }
-}
 
-.RepartidorInput {
-  height: 3vh;
-  width: 15vw;
-  border-radius: 15px;
-  background-color: $tertiaryColor;
-  margin-bottom: 3vh;
-  font-size: large;
-  text-align: center;
-  font-weight: 700;
-}
-
-@media screen and (max-width: 400px) {
-  .RepartidorInput {
-    height: auto;
-    width: auto;
-  }
-}
-
-.checkbox {
-  transform: scale(2);
-  margin: 15px;
-}
-.label {
-  font-size: large;
-  font-weight: 700;
-}
-
-.firstColumnContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  width: 33vw;
-  align-items: center;
-}
-
-@media screen and (max-width: 400px) {
   .container {
-    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    width: 33vw;
+    align-items: center;
   }
-}
 
-.button {
-  background-color: $primaryColor;
-  width: 15vw;
-  height: auto;
-  border-radius: 15px;
-  margin-bottom: 2vh;
-  font-size: medium;
-  font-weight: 700;
-  padding: 2%;
-}
+  @media screen and (max-width: 400px) {
+    .container {
+      width: 90vw;
+    }
+  }
 
-@media screen and (max-width: 400px) {
   .button {
-    width: 30%;
-  }
-}
-
-.p {
-  font-size: xx-large;
-  font-weight: bolder;
-}
-
-@media screen and (max-width: 400px) {
-  .p {
+    // background-color: $primaryColor;
+    width: 15vw;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 2vh;
     font-size: medium;
+    font-weight: 700;
+    padding: 2%;
+  }
+
+  @media screen and (max-width: 400px) {
+    .button {
+      width: 30%;
+    }
+  }
+
+  .p {
+    font-size: xx-large;
     font-weight: bolder;
   }
+
+  @media screen and (max-width: 400px) {
+    .p {
+      font-size: medium;
+      font-weight: bolder;
+    }
+  }
+
+  .stylePage {
+    position: absolute;
+    margin: 0.5% 0 0 95%;
+  }
+
+  .stylePageButton {
+    all: unset;
+    // background-color: white;
+    // color: white;
+  }
 }
 
-.stylePage {
-  position: absolute;
-  margin: 0.5% 0 0 95%;
+.lighttheme {
+  @include apply-theme($light-theme);
 }
-
-.stylePageButton {
-  all: unset;
-  // background-color: white;
-  color: white;
+.darktheme {
+  @include apply-theme($dark-theme);
 }

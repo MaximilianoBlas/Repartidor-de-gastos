@@ -4,6 +4,115 @@ $secodaryColor : "#184D9D" ;
 $tertiaryColor : "#D1F60C" ;
 */
 
+$light-theme: (
+  background-color: #f7f8fa,
+  text-color: #333333,
+  button-bg: #007bff,
+  button-text: #ffffff,
+  button-hover-bg: #0056b3,
+  input-bg: #ffffff,
+  input-border: #cccccc,
+  //   background-color: #ffffff,
+  //   text-color: #333333,
+  //   button-bg: #007bff,
+  //   button-text-color: #ffffff,
+  select-bg-color: #f0f0f0,
+  select-text-color: #333333,
+  select-border-color: #cccccc,
+  focus-border-color: #007bff,
+  checkbox-bg-color: #ffffff,
+  checkbox-border-color: #cccccc,
+  checkbox-checked-bg-color: #007bff,
+  checkbox-checked-border-color: #0056b3,
+  checkbox-icon-color: #ffffff,
+  checkbox-hover-bg-color: #e0e0e0,
+);
+
+$dark-theme: (
+  background-color: #121212,
+  text-color: #e0e0e0,
+  button-bg: #bb86fc,
+  button-text: #121212,
+  button-hover-bg: #9b64d7,
+  input-bg: #1e1e1e,
+  input-border: #444444,
+  //   background-color: #333333,
+  //   text-color: #f0f0f0,
+  //   button-bg: #444444,
+  //   button-text-color: #ffffff,
+  select-bg-color: #444444,
+  select-text-color: #f0f0f0,
+  select-border-color: #555555,
+  focus-border-color: #888888,
+  checkbox-bg-color: #555555,
+  checkbox-border-color: #444444,
+  checkbox-checked-bg-color: #888888,
+  checkbox-checked-border-color: #666666,
+  checkbox-icon-color: #ffffff,
+  checkbox-hover-bg-color: #666666,
+);
+
+@mixin apply-theme($theme) {
+  background-color: map-get($theme, background-color);
+  color: map-get($theme, text-color);
+
+  button {
+    background-color: map-get($theme, button-bg);
+    color: map-get($theme, button-text);
+
+    &:hover {
+      background-color: map-get($theme, button-hover-bg);
+    }
+  }
+
+  input {
+    background-color: map-get($theme, input-bg);
+    border: 1px solid map-get($theme, input-border);
+    color: map-get($theme, text-color);
+  }
+
+  select {
+    background-color: map-get($theme, select-bg-color);
+    color: map-get($theme, select-text-color);
+    border: 1px solid map-get($theme, select-border-color);
+    padding: 0.5rem;
+    border-radius: 5px;
+
+    // Opcional: cambio de color al estar enfocado
+    &:focus {
+      border-color: map-get($theme, focus-border-color);
+      outline: none;
+    }
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: map-get($theme, checkbox-bg-color);
+    border: 1px solid map-get($theme, checkbox-border-color);
+    border-radius: 4px;
+    cursor: pointer;
+
+    // Estilo cuando está seleccionado
+    &:checked {
+      background-color: map-get($theme, checkbox-checked-bg-color);
+      border-color: map-get($theme, checkbox-checked-border-color);
+
+      // Opcional: icono en el checkbox
+      content: "✓"; // Cambia esto por un ícono SVG o lo que prefieras
+      color: map-get($theme, checkbox-icon-color);
+      //   display: flex;
+      //   justify-content: center;
+      //   align-items: center;
+    }
+
+    // Cambio al pasar el cursor
+    &:hover {
+      background-color: map-get($theme, checkbox-hover-bg-color);
+    }
+  }
+}
 
 $oscuro: #2a1e4f;
 $oscuro2: #6d47ff;
@@ -13,10 +122,10 @@ $turqueza: #4ddbd4;
 $creatividadOscuro2: #000000;
 
 $creatividadVioleta: #270140;
-$creatividadOscuro: #3B3C40;
-$creatividadAzulClaro: #BE965F;
-$creatividadTurmarina: #04D9B2;
-$creatividadNaranja: #8D6439;
+$creatividadOscuro: #3b3c40;
+$creatividadAzulClaro: #be965f;
+$creatividadTurmarina: #04d9b2;
+$creatividadNaranja: #8d6439;
 
 // $creatividadVioleta: #270140;
 // $creatividadOscuro: #010326 ;
@@ -24,15 +133,13 @@ $creatividadNaranja: #8D6439;
 // $creatividadTurmarina: #04D9B2;
 // $creatividadNaranja: #F2600C;
 
-
 $firstLetter: #fef9ca;
-$secondLetter:#c5b732;
-$thirdLetter:#E0D9B1;
-$fourthLetter:#aa445f;
-
+$secondLetter: #c5b732;
+$thirdLetter: #e0d9b1;
+$fourthLetter: #aa445f;
 
 $altov: 6.3vh;
-$altomv:3.185vh;
+$altomv: 3.185vh;
 $altoamv: 2.45vh;
 $anchov: 1.05vw;
 $altoh: 1.4vh;
@@ -40,7 +147,6 @@ $anchoh: 3.15vw;
 
 $borde: 1px solid black;
 
-
- $primaryColor :#abd1c6;
- $secondaryColor :  #004643 ;
- $tertiaryColor :   #f9bc60 ;
+$primaryColor: #abd1c6;
+$secondaryColor: #004643;
+$tertiaryColor: #f9bc60;

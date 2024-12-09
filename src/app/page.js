@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   mainContainer,
   divContainer,
@@ -7,6 +7,8 @@ import {
   p,
   stylePage,
   stylePageButton,
+  lighttheme,
+  darktheme,
 } from "./style/style.module.scss";
 import { GoSun } from "react-icons/go";
 import { MdModeNight } from "react-icons/md";
@@ -23,14 +25,19 @@ export default function Home() {
   let amigos = useSelector((state) => state.valores.amigos);
   const [valueStyle, setValueStyle] = useState(true);
 
-  const styleEvent = () => {
-    setValueStyle(!valueStyle);
-  };
+  useEffect(() => {
+    if (valueStyle) document.body.className = lighttheme;
+    else document.body.className = darktheme;
+  }, [valueStyle]);
+  7;
 
   return (
     <div className={mainContainer}>
       <div className={stylePage}>
-        <button onClick={styleEvent} className={stylePageButton}>
+        <button
+          onClick={() => setValueStyle(!valueStyle)}
+          className={stylePageButton}
+        >
           {valueStyle ? <GoSun fontSize={20} /> : <MdModeNight fontSize={20} />}
         </button>
       </div>
