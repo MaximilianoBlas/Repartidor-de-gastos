@@ -8,7 +8,9 @@ export const Repartir = (amigos, elegidos, compraPorRepartir) => {
 
   let montoAPagarPorAmigo = montoADividir / elegidosFiltrados.length;
 
-  let pagoARestar, diferenciaARestar, amigoARestar, pagoAEliminar;
+  let diferenciaARestar, amigoARestar;
+  let arrayPagoARestar = [];
+  let arrayPagoAEliminar = [];
 
   let amigosActualizado = amigos.map((amigo) => {
     if (elegidos[amigo.amigo]) {
@@ -27,7 +29,8 @@ export const Repartir = (amigos, elegidos, compraPorRepartir) => {
           if (Math.trunc(montoAPagarPorAmigo) > deuda.monto) {
             let diferencia = Math.trunc(montoAPagarPorAmigo) - deuda.monto;
 
-            pagoAEliminar = deuda;
+            arrayPagoAEliminar.push(deuda);
+
             amigoARestar = amigoAQuienPagar;
 
             return {
@@ -43,9 +46,10 @@ export const Repartir = (amigos, elegidos, compraPorRepartir) => {
             };
           } else {
             diferenciaARestar = deuda.monto - Math.trunc(montoAPagarPorAmigo);
-            pagoARestar = deuda;
-            amigoARestar = amigoAQuienPagar;
+            let nuevaDeuda = { ...deuda, diferenciaARestar };
 
+            arrayPagoARestar.push(nuevaDeuda);
+            amigoARestar = amigoAQuienPagar;
             return {
               ...amigo,
             };
@@ -110,46 +114,50 @@ export const Repartir = (amigos, elegidos, compraPorRepartir) => {
     }
   });
 
-  if (pagoAEliminar) {
-    amigosActualizado = amigosActualizado.map((amigo) => {
-      if (amigo.amigo === amigoARestar.amigo) {
-        let nuevoPago = amigo.pagar.filter(
-          (pago) =>
-            pago.pagarA !== pagoAEliminar.pagarA &&
-            pago.compra !== pagoAEliminar.compra
-        );
+  if (arrayPagoAEliminar.length > 0) {
+    arrayPagoAEliminar.map((pagoAEliminar) => {
+      amigosActualizado = amigosActualizado.map((amigo) => {
+        if (amigo.amigo === amigoARestar.amigo) {
+          let nuevoPago = amigo.pagar.filter(
+            (pago) =>
+              pago.pagarA !== pagoAEliminar.pagarA &&
+              pago.compra !== pagoAEliminar.compra
+          );
 
-        let nuevoAmigo = { ...amigo, pagar: [...nuevoPago] };
+          let nuevoAmigo = { ...amigo, pagar: [...nuevoPago] };
 
-        return nuevoAmigo;
-      } else {
-        return { ...amigo };
-      }
+          return nuevoAmigo;
+        } else {
+          return { ...amigo };
+        }
+      });
     });
   }
 
-  if (pagoARestar) {
-    amigosActualizado = amigosActualizado.map((amigo) => {
-      if (amigo.amigo === amigoARestar.amigo) {
-        let nuevoPago = amigo.pagar.map((pago) => {
-          if (
-            pago.pagarA === pagoARestar.pagarA &&
-            pago.compra === pagoARestar.compra
-          ) {
-            return {
-              pagarA: pagoARestar.pagarA,
-              monto: diferenciaARestar,
-              compra: pagoARestar.compra,
-            };
-          } else return pago;
-        });
+  if (arrayPagoARestar.length > 0) {
+    arrayPagoARestar.map((pagoARestar, indice) => {
+      amigosActualizado = amigosActualizado.map((amigo) => {
+        if (amigo.amigo === amigoARestar.amigo) {
+          let nuevoPago = amigo.pagar.map((pago) => {
+            if (
+              pago.pagarA === pagoARestar.pagarA &&
+              pago.compra === pagoARestar.compra
+            ) {
+              return {
+                pagarA: pagoARestar.pagarA,
+                monto: pagoARestar.diferenciaARestar,
+                compra: pagoARestar.compra,
+              };
+            } else return pago;
+          });
 
-        let nuevoAmigo = { ...amigo, pagar: [...nuevoPago] };
+          let nuevoAmigo = { ...amigo, pagar: [...nuevoPago] };
 
-        return nuevoAmigo;
-      } else {
-        return { ...amigo };
-      }
+          return nuevoAmigo;
+        } else {
+          return { ...amigo };
+        }
+      });
     });
   }
 

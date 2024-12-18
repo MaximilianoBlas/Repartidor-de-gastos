@@ -67,7 +67,7 @@ export default function Home() {
                   amigo.amigo !== pago.pagarA && (
                     <p className={p} key={`${indiceAmigo}${indicePago}`}>{`${
                       amigo.amigo.charAt(0).toUpperCase() + amigo.amigo.slice(1)
-                    } paga a ${
+                    } le paga a ${
                       pago.pagarA.charAt(0).toUpperCase() + pago.pagarA.slice(1)
                     } $${pago.monto} por el producto "${pago.compra}"`}</p>
                   )
