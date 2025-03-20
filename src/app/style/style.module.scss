@@ -84,6 +84,12 @@
       width: 30%;
     }
   }
+  @media screen and (max-width: 400px) {
+    .responseContainer {
+      width: 100%;
+      overflow-wrap: break-word;
+    }
+  }
 
   .p {
     font-size: xx-large;

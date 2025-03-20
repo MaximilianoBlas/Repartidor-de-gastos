@@ -9,6 +9,7 @@ import {
   stylePageButton,
   lighttheme,
   darktheme,
+  responseContainer,
 } from "./style/style.module.scss";
 import { GoSun } from "react-icons/go";
 import { MdModeNight } from "react-icons/md";
@@ -56,7 +57,7 @@ export default function Home() {
           <RepartirDinero />
         </div>
       </div>
-      <div>
+      <div className={responseContainer}>
         {amigos[0] &&
           amigos[0].pagar &&
           amigos.map((amigo, indiceAmigo) => {

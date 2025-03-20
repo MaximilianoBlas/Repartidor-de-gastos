@@ -44,12 +44,15 @@ export const AgregarCompra = () => {
       let nuevaCompra = compra;
       nuevaCompra.amigo = "restaurante";
       dispatch(agregarCompras([...compras, nuevaCompra]));
-    } else dispatch(agregarCompras([...compras, compra]));
+      let inputCompra = document && document.getElementById("compra");
+      inputCompra && inputCompra.focus();
+    } else {
+      dispatch(agregarCompras([...compras, compra]));
+      let inputAmigo = document && document.getElementById("amigo");
+      inputAmigo && inputAmigo.focus();
+    }
 
     setCompra({ compra: "", precio: "", amigo: "" });
-
-    let inputAmigo = document && document.getElementById("amigo");
-    inputAmigo && inputAmigo.focus();
   };
 
   return (
