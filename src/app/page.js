@@ -10,6 +10,7 @@ import {
   lighttheme,
   darktheme,
   responseContainer,
+  restaurantMode,
 } from "./style/style.module.scss";
 import { GoSun } from "react-icons/go";
 import { MdModeNight } from "react-icons/md";

@@ -1,9 +1,3 @@
-/*
-$primaryColor : "#D4481E" ;
-$secodaryColor : "#184D9D" ;
-$tertiaryColor : "#D1F60C" ;
-*/
-
 $light-theme: (
   background-color: #f7f8fa,
   text-color: #333333,
@@ -12,10 +6,6 @@ $light-theme: (
   button-hover-bg: #0056b3,
   input-bg: #ffffff,
   input-border: #cccccc,
-  //   background-color: #ffffff,
-  //   text-color: #333333,
-  //   button-bg: #007bff,
-  //   button-text-color: #ffffff,
   select-bg-color: #f0f0f0,
   select-text-color: #333333,
   select-border-color: #cccccc,
@@ -36,10 +26,6 @@ $dark-theme: (
   button-hover-bg: #9b64d7,
   input-bg: #1e1e1e,
   input-border: #444444,
-  //   background-color: #333333,
-  //   text-color: #f0f0f0,
-  //   button-bg: #444444,
-  //   button-text-color: #ffffff,
   select-bg-color: #444444,
   select-text-color: #f0f0f0,
   select-border-color: #555555,
@@ -62,6 +48,10 @@ $dark-theme: (
 
     &:hover {
       background-color: map-get($theme, button-hover-bg);
+    }
+
+    &:disabled {
+      background-color: map-get($theme, select-bg-color);
     }
   }
 
@@ -113,40 +103,9 @@ $dark-theme: (
     }
   }
 }
-
-$oscuro: #2a1e4f;
-$oscuro2: #6d47ff;
-$verde: #3be8b0;
-$amarillo: #fcdd5c;
-$turqueza: #4ddbd4;
-$creatividadOscuro2: #000000;
-
-$creatividadVioleta: #270140;
-$creatividadOscuro: #3b3c40;
-$creatividadAzulClaro: #be965f;
-$creatividadTurmarina: #04d9b2;
-$creatividadNaranja: #8d6439;
-
-// $creatividadVioleta: #270140;
-// $creatividadOscuro: #010326 ;
-// $creatividadAzulClaro: #04BFBF;
-// $creatividadTurmarina: #04D9B2;
-// $creatividadNaranja: #F2600C;
-
-$firstLetter: #fef9ca;
-$secondLetter: #c5b732;
-$thirdLetter: #e0d9b1;
-$fourthLetter: #aa445f;
-
 $altov: 6.3vh;
 $altomv: 3.185vh;
 $altoamv: 2.45vh;
 $anchov: 1.05vw;
 $altoh: 1.4vh;
 $anchoh: 3.15vw;
-
-$borde: 1px solid black;
-
-$primaryColor: #abd1c6;
-$secondaryColor: #004643;
-$tertiaryColor: #f9bc60;

@@ -77,11 +77,14 @@
     font-size: medium;
     font-weight: 700;
     padding: 2%;
+    // &:disabled {
+    //   background-color: #444444;
+    // }
   }
 
   @media screen and (max-width: 400px) {
     .button {
-      width: 30%;
+      width: 32%;
     }
   }
   @media screen and (max-width: 400px) {
@@ -105,7 +108,7 @@
 
   .stylePage {
     position: absolute;
-    margin: 0.5% 0 0 95%;
+    margin: 0.5% 0 0 89%;
   }
 
   .stylePageButton {
