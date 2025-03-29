@@ -1,7 +1,12 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
-import { cambiarAmigos, cambiarDAutomatica } from "@/app/reduxToolkit/slice";
+import {
+  cambiarAmigos,
+  cambiarCompras,
+  cambiarComprasRepartidas,
+  cambiarDAutomatica,
+} from "@/app/reduxToolkit/slice";
 import { button } from "../../style/style.module.scss";
 import { Repartir } from "@/app/Hooks/repartirDinero";
 import { useState } from "react";
@@ -9,9 +14,9 @@ import { useState } from "react";
 export const DistribucionAutomatica = () => {
   const dispatch = useDispatch();
 
-  let amigos = useSelector((state) => state.valores.amigos);
-  let compras = useSelector((state) => state.valores.compras);
-  let dAutomatica = useSelector((state) => state.valores.dAutomatica);
+  let { amigos } = useSelector((state) => state.valores);
+  let { compras } = useSelector((state) => state.valores);
+  // let { dAutomatica } = useSelector((state) => state.valores);
   let nuevoAmigo = amigos;
   let amigosConQuienesRepartir = {};
 
@@ -23,12 +28,14 @@ export const DistribucionAutomatica = () => {
       nuevoAmigo = Repartir(nuevoAmigo, amigosConQuienesRepartir, compra);
     });
     dispatch(cambiarAmigos(nuevoAmigo));
-    dispatch(cambiarDAutomatica());
+    // dispatch(cambiarDAutomatica());
+    dispatch(cambiarComprasRepartidas(compras));
+    dispatch(cambiarCompras([]));
   };
 
   return (
     <button
-      disabled={dAutomatica}
+      // disabled={dAutomatica}
       id="button"
       className={button}
       onClick={distribucionAutomatica}

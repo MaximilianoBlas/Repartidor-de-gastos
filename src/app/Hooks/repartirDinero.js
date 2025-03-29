@@ -1,6 +1,9 @@
 "use client";
 
-export const Repartir = (amigos, elegidos, compraPorRepartir) => {
+import eliminarCompraHook from "./eliminarCompraHook";
+
+export const Repartir = (amigos, elegidos, compraPorRepartir, compras) => {
+  console.log(amigos);
   const montoADividir = compraPorRepartir.precio;
   const elegidosFiltrados = Object.keys(elegidos).filter(
     (elegido) => elegidos[elegido]
@@ -161,5 +164,12 @@ export const Repartir = (amigos, elegidos, compraPorRepartir) => {
     });
   }
 
-  return amigosActualizado;
+  console.log(amigosActualizado, "amigos al final de repartir dinero");
+  console.log(compras, "compras en repartir dinero");
+
+  let compra = Object.values(compraPorRepartir).join(",");
+  let eliminados = eliminarCompraHook(amigosActualizado, compras, compra);
+
+  console.log(eliminados.amigos, "esto es eliminados.amigos");
+  return eliminados.amigos;
 };

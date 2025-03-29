@@ -6,7 +6,7 @@ import { button } from "../../style/style.module.scss";
 
 export const Restaurante = () => {
   const dispatch = useDispatch();
-  const restaurante = useSelector((state) => state.valores.restaurante);
+  const { restaurante } = useSelector((state) => state.valores);
 
   const buttonEvent = () => {
     dispatch(cambiarRestaurante());

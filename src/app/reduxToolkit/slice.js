@@ -12,6 +12,7 @@ export const Slice = createSlice({
     compras: [],
     colores: {},
     dAutomatica: false,
+    comprasRepartidas: [],
   },
   reducers: {
     cambiarAmigos: (state, action) => {
@@ -23,7 +24,7 @@ export const Slice = createSlice({
     cambiarCompraPorRepartir: (state, action) => {
       state.compraPorRepartir = action.payload;
     },
-    agregarCompras: (state, action) => {
+    cambiarCompras: (state, action) => {
       state.compras = action.payload;
     },
 
@@ -36,6 +37,9 @@ export const Slice = createSlice({
     cambiarDAutomatica: (state) => {
       state.dAutomatica = !state.dAutomatica;
     },
+    cambiarComprasRepartidas: (state, action) => {
+      state.comprasRepartidas = action.payload;
+    },
   },
 });
 
@@ -43,10 +47,11 @@ export const {
   cambiarAmigos,
   cambiarElegidos,
   cambiarCompraPorRepartir,
-  agregarCompras,
+  cambiarCompras,
   cambiarColores,
   cambiarRestaurante,
   cambiarDAutomatica,
+  cambiarComprasRepartidas,
 } = Slice.actions;
 
 export default Slice.reducer;

@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const AmigosParaRepartir = () => {
   const dispatch = useDispatch();
-  let amigos = useSelector((state) => state.valores.amigos);
-  let elegidos = useSelector((state) => state.valores.elegidos);
+  let { amigos } = useSelector((state) => state.valores);
+  let { elegidos } = useSelector((state) => state.valores);
 
   const checkboxEvent = (e) => {
     dispatch(

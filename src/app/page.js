@@ -14,11 +14,11 @@ import {
 } from "./style/style.module.scss";
 import { GoSun } from "react-icons/go";
 import { MdModeNight } from "react-icons/md";
-import { AgregarAmigo } from "./componentes/AgregarAmigos/agregarAmigos";
-import { AgregarCompra } from "./componentes/AgregarCompra/agregarCompra";
+import { GestionAmigos } from "./componentes/GestionAmigos/gestionAmigos";
+import { GestionCompra } from "./componentes/GestionCompra/gestionCompra";
 import { CompraADividir } from "./componentes/CompraADividir/compraADividir";
-import { RepartirDinero } from "./componentes/RepartirDinero/repartirDinero";
-import { AmigosParaRepartir } from "./componentes/AmigosParaRepartir/amigosParaRepartir";
+// import { RepartirDinero } from "./componentes/RepartirDinero/repartirDinero";
+// import { AmigosParaRepartir } from "./componentes/AmigosParaRepartir/amigosParaRepartir";
 import { DistribucionAutomatica } from "./componentes/DistribucionAutomatica/distribucionAutomatica";
 import { useSelector } from "react-redux";
 import { Restaurante } from "./componentes/Restaurante/restaurante";
@@ -47,15 +47,15 @@ export default function Home() {
       <div className={divContainer}>
         <div className={container}>
           <Restaurante />
-          <AgregarAmigo />
+          <GestionAmigos />
         </div>
-        <AgregarCompra />
+        <GestionCompra />
         <div className={container}>
           <h2>Distribuir</h2>
           <DistribucionAutomatica />
           <CompraADividir />
-          <AmigosParaRepartir />
-          <RepartirDinero />
+          {/* <AmigosParaRepartir /> */}
+          {/* <RepartirDinero /> */}
         </div>
       </div>
       <div className={responseContainer}>
