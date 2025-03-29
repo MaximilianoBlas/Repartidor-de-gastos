@@ -25,7 +25,12 @@ export const DistribucionAutomatica = () => {
   });
   const distribucionAutomatica = () => {
     compras.forEach((compra) => {
-      nuevoAmigo = Repartir(nuevoAmigo, amigosConQuienesRepartir, compra);
+      nuevoAmigo = Repartir(
+        nuevoAmigo,
+        amigosConQuienesRepartir,
+        compra,
+        compras
+      );
     });
     dispatch(cambiarAmigos(nuevoAmigo));
     // dispatch(cambiarDAutomatica());
