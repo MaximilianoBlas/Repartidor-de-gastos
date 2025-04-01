@@ -13,7 +13,11 @@ export const Restaurante = () => {
   };
 
   return (
-    <button className={button} onClick={() => buttonEvent()}>
+    <button
+      style={{ padding: "0.5%" }}
+      className={button}
+      onClick={() => buttonEvent()}
+    >
       {restaurante ? "Comer con amigos" : "Comer en restaurente"}
     </button>
   );

@@ -3,14 +3,11 @@
 import eliminarCompraHook from "./eliminarCompraHook";
 
 export const Repartir = (amigos, elegidos, compraPorRepartir, compras) => {
-  console.log(amigos);
   const montoADividir = compraPorRepartir.precio;
   const elegidosFiltrados = Object.keys(elegidos).filter(
     (elegido) => elegidos[elegido]
   );
-
   let montoAPagarPorAmigo = montoADividir / elegidosFiltrados.length;
-
   let diferenciaARestar, amigoARestar;
   let arrayPagoARestar = [];
   let arrayPagoAEliminar = [];
@@ -164,12 +161,8 @@ export const Repartir = (amigos, elegidos, compraPorRepartir, compras) => {
     });
   }
 
-  console.log(amigosActualizado, "amigos al final de repartir dinero");
-  console.log(compras, "compras en repartir dinero");
-
   let compra = Object.values(compraPorRepartir).join(",");
   let eliminados = eliminarCompraHook(amigosActualizado, compras, compra);
 
-  console.log(eliminados.amigos, "esto es eliminados.amigos");
   return eliminados.amigos;
 };

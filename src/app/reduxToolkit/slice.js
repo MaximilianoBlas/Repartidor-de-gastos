@@ -38,7 +38,7 @@ export const Slice = createSlice({
       state.dAutomatica = !state.dAutomatica;
     },
     cambiarComprasRepartidas: (state, action) => {
-      state.comprasRepartidas = action.payload;
+      state.comprasRepartidas = [...state.comprasRepartidas, action.payload];
     },
   },
 });

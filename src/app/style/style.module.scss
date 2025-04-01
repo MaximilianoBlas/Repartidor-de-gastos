@@ -130,6 +130,41 @@
   font-weight: 700;
 }
 
+.modal {
+  position: absolute;
+  height: 40%;
+  width: 40%;
+  margin: -40vh 0 0 -20vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media screen and (max-width: 400px) {
+  .modal {
+    height: 50vh;
+    width: 80vw;
+    margin: -60vh 0 0 -39vw;
+  }
+}
+
+.closeButtonContainer {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}
+.modalContentContainer {
+  width: 100%;
+  overflow: auto;
+}
+
+.modalContent {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+
 .lighttheme {
   @include apply-theme($light-theme);
 }

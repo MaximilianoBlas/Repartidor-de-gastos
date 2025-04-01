@@ -34,7 +34,10 @@ export const GestionCompra = () => {
   };
 
   const agregarCompra = () => {
-    if (compra.compra.length && compra.precio.length && compra.amigo.length) {
+    if (
+      (compra.compra.length && compra.precio.length && compra.amigo.length) ||
+      (compra.compra.length && compra.precio.length && restaurante)
+    ) {
       let { comprasHook, amigos } = agregarCompraHook(
         selectorAmigos,
         compras,

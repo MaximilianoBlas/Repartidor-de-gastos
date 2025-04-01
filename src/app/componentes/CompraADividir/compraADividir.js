@@ -5,6 +5,7 @@ import {
   cambiarElegidos,
   cambiarAmigos,
   cambiarCompras,
+  cambiarComprasRepartidas,
 } from "@/app/reduxToolkit/slice";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -25,8 +26,6 @@ export const CompraADividir = () => {
 
   const selectEvent = (e) => {
     let compra = compras[e.target.selectedIndex - 1];
-
-    console.log(compra, "compra por repartir");
 
     dispatch(cambiarCompraPorRepartir(compra));
 
@@ -52,6 +51,7 @@ export const CompraADividir = () => {
       let { comprasHook } = eliminarCompraHook(amigos, compras, compra);
       dispatch(cambiarCompras(comprasHook));
       dispatch(cambiarCompraPorRepartir({}));
+      dispatch(cambiarComprasRepartidas(compraPorRepartir));
 
       let select = document && document.getElementById("distribucion");
       if (select) select.value = "elige";

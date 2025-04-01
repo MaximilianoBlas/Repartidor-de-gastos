@@ -31,10 +31,10 @@ export const DistribucionAutomatica = () => {
         compra,
         compras
       );
+      dispatch(cambiarComprasRepartidas(compra));
     });
     dispatch(cambiarAmigos(nuevoAmigo));
     // dispatch(cambiarDAutomatica());
-    dispatch(cambiarComprasRepartidas(compras));
     dispatch(cambiarCompras([]));
   };
 

@@ -5,10 +5,6 @@ export default function eliminarCompraHook(selectorAmigos, compras, compra) {
     return { ...e };
   });
 
-  console.log(selectorAmigos, "amigos en eliminar compra");
-  console.log(compras, "compras en eliminar compras");
-  console.log(compra, "compra en eliminar compras");
-
   const arrayFilter = (array) => {
     return array.filter(
       (compra, i) =>

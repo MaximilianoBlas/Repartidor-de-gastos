@@ -22,10 +22,14 @@ import { CompraADividir } from "./componentes/CompraADividir/compraADividir";
 import { DistribucionAutomatica } from "./componentes/DistribucionAutomatica/distribucionAutomatica";
 import { useSelector } from "react-redux";
 import { Restaurante } from "./componentes/Restaurante/restaurante";
+import HistorialCompras from "./componentes/HistorialCompras/historialCompras";
 
 export default function Home() {
   let amigos = useSelector((state) => state.valores.amigos);
   const [valueStyle, setValueStyle] = useState(true);
+  const { comprasRepartidas } = useSelector((state) => state.valores);
+
+  console.log(comprasRepartidas);
 
   useEffect(() => {
     if (valueStyle) document.body.className = lighttheme;
@@ -44,9 +48,9 @@ export default function Home() {
         </button>
       </div>
       <h1>Repartidor de gastos</h1>
+      <Restaurante />
       <div className={divContainer}>
         <div className={container}>
-          <Restaurante />
           <GestionAmigos />
         </div>
         <GestionCompra />
@@ -58,6 +62,7 @@ export default function Home() {
           {/* <RepartirDinero /> */}
         </div>
       </div>
+      {comprasRepartidas.length > 0 && <HistorialCompras />}
       <div className={responseContainer}>
         {amigos[0] &&
           amigos[0].pagar &&
