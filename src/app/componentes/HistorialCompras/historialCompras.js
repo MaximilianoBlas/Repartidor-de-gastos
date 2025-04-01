@@ -39,10 +39,10 @@ export default function HistorialCompras() {
 
             {comprasRepartidas.map((compra, i) => {
               return (
-                <div className={modalContent}>
-                  <h3>{compra.compra}</h3>
-                  <h3>{compra.precio}</h3>
-                  <h3>{compra.amigo}</h3>
+                <div className={modalContent} key={i}>
+                  <h3 key={`a${i}`}>{compra.compra}</h3>
+                  <h3 key={`b${i}`}>{compra.precio}</h3>
+                  <h3 key={`c${i}`}>{compra.amigo}</h3>
                 </div>
               );
             })}
